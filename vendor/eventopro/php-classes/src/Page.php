@@ -35,7 +35,7 @@ private $defaults = [
 
 		foreach ($data as $key => $value) {
 		# code...
-		$this->$tpl->assign($key , $value);
+		$this->tpl->assign($key , $value);
 		
 		}
 

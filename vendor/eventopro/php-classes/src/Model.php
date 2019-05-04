@@ -16,15 +16,15 @@ class Model{
 		switch ($method) {
 			case "get":
 				# code...
-			$this->values[$fieldName];
+			return (isset($this->values[$fieldName])) ? $this->values[$fieldName] : NULL;
 				break;
 				case "set":
-				$this->values[$fieldName]=$args;
+				$this->values[$fieldName]=$args[0];
 				break;
 			}
 		
 	}
-public function setData($data)
+public function setData($data = array())
 	{
 
 		foreach ($data as $key => $value)
