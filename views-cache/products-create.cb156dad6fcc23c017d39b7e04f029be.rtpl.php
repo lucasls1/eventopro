@@ -3,7 +3,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Lista de Categorias
+    Lista de Eventos
   </h1>
   <ol class="breadcrumb">
     <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -19,15 +19,27 @@
   	<div class="col-md-12">
   		<div class="box box-success">
         <div class="box-header with-border">
-          <h3 class="box-title">Novo Categoria</h3>
+          <h3 class="box-title">Novo Evento</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/categories/create" method="post">
+        <form role="form" action="/admin/eventos/create" method="post">
           <div class="box-body">
             <div class="form-group">
-              <label for="descategory">Nome da categoria</label>
-              <input type="text" class="form-control" id="nme_categoria" name="nme_categoria" placeholder="Digite o nome da categoria">
+              <label for="desproduct">Nome do Evento</label>
+              <input type="text" class="form-control" id="nme_evento" name="nme_evento" placeholder="Digite o nome do produto">
+            </div>
+            <div class="form-group">
+              <label for="vlprecointeiro">Preço Inteira</label>
+              <input type="number" class="form-control" id="vlr_inteiro" name="vlr_inteiro" step="0.01" placeholder="0.00">
+            </div>
+            <div class="form-group">
+              <label for="vlprecomeia">Preço Meia</label>
+              <input type="number" class="form-control" id="vlr_meia" name="vlr_meia" step="0.01" placeholder="0.00">
+            </div>
+             <div class="form-group">
+              <label for="desurl">URL</label>
+              <input type="text" class="form-control" id="url_url" name="url_url">
             </div>
           </div>
           <!-- /.box-body -->

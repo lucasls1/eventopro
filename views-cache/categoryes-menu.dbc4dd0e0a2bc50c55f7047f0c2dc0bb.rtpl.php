@@ -1,1 +1,1 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><li><a href="/categories/2">FUNK</a></li><li><a href="/categories/3">RAP</a></li><li><a href="/categories/4">SERTANEJO</a></li>
+<?php if(!class_exists('Rain\Tpl')){exit;}?><li><a href="/categories/2">FUNK</a></li>

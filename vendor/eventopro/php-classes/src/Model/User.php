@@ -16,7 +16,7 @@ public static function login($login, $password):User
 
 		$db = new Sql();
 
-		$results = $db->select("SELECT * FROM tb_users WHERE deslogin = :LOGIN", array(
+		$results = $db->select("SELECT * FROM tb_usuario WHERE usr_login = :LOGIN", array(
 			":LOGIN"=>$login
 		));
 
@@ -26,7 +26,7 @@ public static function login($login, $password):User
 
 		$data = $results[0];
 
-		if (password_verify($password, $data["despassword"])) {
+		if (password_verify($password, $data["pwd_senha"])) {
 
 			$user = new User();
 			$user->setData($data);
@@ -58,9 +58,9 @@ public static function login($login, $password):User
 			|| 
 			!$_SESSION[User::SESSION]
 			||
-			!(int)$_SESSION[User::SESSION]["iduser"] > 0
+			!(int)$_SESSION[User::SESSION]["pk_usuario"] > 0
 			||
-			(bool)$_SESSION[User::SESSION]["iduser"] !== $inadmin
+			(bool)$_SESSION[User::SESSION]["pk_usuario"] !== $inadmin
 		) {
 			
 			header("Location: /admin/login");
@@ -74,7 +74,7 @@ public static function login($login, $password):User
 
 		$sql = new Sql();
 
-		return $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) ORDER BY b.desperson");
+		return $sql->select("SELECT * FROM tb_usuario a INNER JOIN tb_pessoa b ON a.fk_pessoa = b.pk_pessoa ORDER BY b.nme_pessoa");
 
 	}
 
@@ -82,24 +82,24 @@ public static function login($login, $password):User
 
 		$sql = new Sql();
 
-		$results = $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)",array(
-				":desperson"  =>   $this->getdesperson(),
-				":deslogin"  =>    $this->getdeslogin(),
-				":despassword"  => $this->getdespassword(),
-				":desemail"  =>    $this->getdesemail(),
+		$results = $sql->select("CALL sp_usuario_save(:nme_pessoa, :usr_login, :pwd_senha, :eml_email, :nrphone, :adm_inadim)",array(
+				":nme_pessoa"  =>   $this->getnme_pessoa(),
+				":usr_login"  =>    $this->getusr_login(),
+				":pwd_senha"  =>    $this->getpwd_senha(),
+				":eml_email"  =>    $this->geteml_email(),
 				":nrphone"  =>     $this->getnrphone(),
-				":inadmin"  =>     $this->getinadmin()
+				":adm_inadim"  =>     $this->getadm_inadim()
 			));
 		
 		$this->setData($results[0]);
 	}
 
-	public function get($iduser){
+	public function get($idusuario){
 
 		$sql = new Sql();
-		$results = $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) WHERE a.iduser = :iduser",
+		$results = $sql->select("SELECT * FROM tb_usuario a INNER JOIN tb_pessoa b ON a.fk_pessoa = b.pk_pessoa WHERE a.pk_usuario = :pk_usuario",
 			array(
-				":iduser"=>$iduser
+				":pk_usuario"=>$idusuario
 			));
 		$this->setData($results[0]);
 	}
@@ -108,14 +108,14 @@ public static function login($login, $password):User
 
 			$sql = new Sql();
 
-		$results = $sql->select("CALL sp_usersupdate_save(:iduser, :desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)",array(
-				":iduser" => $this->getiduser(),
-				":desperson"  =>   $this->getdesperson(),
-				":deslogin"  =>    $this->getdeslogin(),
-				":despassword"  => $this->getdespassword(),
-				":desemail"  =>    $this->getdesemail(),
+		$results = $sql->select("CALL sp_updateusuario_save(:pk_usuario, :nme_pessoa, :usr_login, :pwd_senha, :eml_email, :nrphone, :adm_inadim)",array(
+				":pk_usuario" => $this->getpk_usuario(),
+				":nme_pessoa"  =>   $this->getnme_pessoa(),
+				":usr_login"  =>    $this->getusr_login(),
+				":pwd_senha"  => $this->getpwd_senha(),
+				":eml_email"  =>    $this->geteml_email(),
 				":nrphone"  =>     $this->getnrphone(),
-				":inadmin"  =>     $this->getinadmin()
+				":adm_inadim"  =>     $this->getadm_inadim()
 			));
 		
 		$this->setData($results[0]);
@@ -124,8 +124,8 @@ public static function login($login, $password):User
 	public function delete(){
 		$sql = new Sql();
 
-		$sql->query("CALL sp_users_delete(:iduser)",array(
-			":iduser" =>$this->getiduser()
+		$sql->query("CALL sp_usuario_delete(:pk_usuario)",array(
+			":pk_usuario" =>$this->getpk_usuario()
 
 		));
 	}
@@ -154,8 +154,8 @@ public static function login($login, $password):User
 		$sql = new Sql();
 
 			$results = $sql->select("SELECT * 
-				FROM  tb_persons a
-				INNER JOIN tb_users b USING(idperson)
+				FROM  tb_pessoa a
+				INNER JOIN tb_usuario b USING(idpessoa)
 				where a.desemail = :email",array(
 					":email"=>$email
 				));
@@ -165,8 +165,8 @@ public static function login($login, $password):User
 				}
 				else{
 					$data = $results[0];
-				$results2 = $sql->select("CALL sp_userspasswordsrecoveries_create(:iduser,:desip)",array(
-					":iduser"=>$data["iduser"],
+				$results2 = $sql->select("CALL sp_usuariorecuperasenha_create(:idusuario,:desip)",array(
+					":idusuario"=>$data["idusuario"],
 					":desip"=>$_SERVER["REMOTE_ADDR"]
 				));
 				if(count($results2)===0){
@@ -199,17 +199,17 @@ public static function login($login, $password):User
 	     	$sql = new Sql();
 	     	$results = $sql->select("
 	         SELECT *
-	         FROM tb_userspasswordsrecoveries a
-	         INNER JOIN tb_users b USING(iduser)
-	         INNER JOIN tb_persons c USING(idperson)
+	         FROM tb_logrecuperacaosenhausuario a
+	         INNER JOIN tb_usuario b USING(idusuario)
+	         INNER JOIN tb_pessoa c USING(idpessoa)
 	         WHERE
-	         a.idrecovery = :idrecovery
+	         a.idrecovery = :idrecuperacao
 	         AND
 	         a.dtrecovery IS NULL
 	         AND
 	         DATE_ADD(a.dtregister, INTERVAL 1 HOUR) >= NOW()",array(
 
-	         	":idrecovery"=>$idrecovery
+	         	":idrecuperacao"=>$idrecovery
 	         ));
 				
   
@@ -224,24 +224,24 @@ public static function login($login, $password):User
 
 
 	}
-	public function setForgotUsed($idrecovery){
+	public function setForgotUsed($idrecuperacao){
 
 		$sql = new Sql();
 
-		$sql->query("UPDATE tb_userspasswordsrecoveries SET dtrecovery = NOW() WHERE idrecovery = :idrecovery",array(
-			":idrecovery"=> $idrecovery
+		$sql->query("UPDATE tb_logrecuperacaosenhausuario SET dtrecuperacao = NOW() WHERE idrecuperacao = :idrecuperacao",array(
+			":idrecuperacao"=> $idrecuperacao
 
 		));
 
 
 	}
-	public function setPassword($password){
+	public function setPassword($senha){
 
 		$sql = new Sql();
-		$sql->query("UPDATE tb_users SET despassword = :password WHERE iduser = :iduser",array(
+		$sql->query("UPDATE tb_usuario SET dessenha = :senha WHERE idusuario = :idusuario",array(
 
-			":password"=>$password,
-			":iduser" => $this->getiduser()
+			":senha"=>$senha,
+			":idusuario" => $this->getidusuario()
 		));
 	}
 

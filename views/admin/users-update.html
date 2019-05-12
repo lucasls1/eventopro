@@ -18,15 +18,15 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/users/{$user.iduser}" method="post">
+        <form role="form" action="/admin/users/{$user.pk_usuario}" method="post">
           <div class="box-body">
             <div class="form-group">
-              <label for="desperson">Nome</label>
-              <input type="text" class="form-control" id="desperson" name="desperson" placeholder="Digite o nome" value="{$user.desperson}">
+              <label for="despessoa">Nome</label>
+              <input type="text" class="form-control" id="nme_pessoa" name="nme_pessoa" placeholder="Digite o nome" value="{$user.nme_pessoa}">
             </div>
             <div class="form-group">
               <label for="deslogin">Login</label>
-              <input type="text" class="form-control" id="deslogin" name="deslogin" placeholder="Digite o login"  value="{$user.deslogin}">
+              <input type="text" class="form-control" id="usr_login" name="usr_login" placeholder="Digite o login"  value="{$user.usr_login}">
             </div>
             <div class="form-group">
               <label for="nrphone">Telefone</label>
@@ -34,11 +34,11 @@
             </div>
             <div class="form-group">
               <label for="desemail">E-mail</label>
-              <input type="email" class="form-control" id="desemail" name="desemail" placeholder="Digite o e-mail" value="{$user.desemail}">
+              <input type="email" class="form-control" id="eml_email" name="eml_email" placeholder="Digite o e-mail" value="{$user.eml_email}">
             </div>
             <div class="checkbox">
               <label>
-                <input type="checkbox" name="inadmin" value="1" {if="$user.inadmin == 1"}checked{/if}> Acesso de Administrador
+                <input type="checkbox" name="adm_inadim" value="1" {if="$user.adm_inadim == 1"}checked{/if}> Acesso de Administrador
               </label>
             </div>
           </div>
