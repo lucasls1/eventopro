@@ -28,79 +28,22 @@
                     <div class="latest-product">
                         <h2 class="section-title">Eventos</h2>
                         <div class="product-carousel">
+                            {loop="$evento"}
                             <div class="single-product">
                                 <div class="product-f-image">
-                                    <img src="/res/site/img/bailedosamuk-anuncio.png" alt="">
+                                   <img class="img-responsive" id="image-preview" src="{$value.desphoto}" alt="Photo">
                                     <div class="product-hover">
                                        
-                                        <a href="#" class="view-details-link"><i class="fa fa-link"></i>Detalhes</a>
+                                        <a href="/eventos/{$value.url_url}" class="view-details-link"><i class="fa fa-link"></i>Detalhes</a>
                                     </div>
                                 </div>
                                 
-                                <h2><a href="#">Baile Do Samuk | Gravação do DVD</a></h2>
+                                <h2><a href="/eventos/{$value.url_url}">{$value.nme_evento}</a></h2>
                             
                             </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="/res/site/img/bailedoimperador-anuncio.jpg" alt="">
-                                    <div class="product-hover">
-                                      
-                                        <a href="#" class="view-details-link"><i class="fa fa-link"></i>Detalhes</a>
-                                    </div>
-                                </div>
-                                
-                                <h2>Baile do Imperador</h2>
-                             
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="/res/site/img/happyholi-anuncio.jpg" alt="">
-                                    <div class="product-hover">
-                                     
-                                        <a href="#" class="view-details-link"><i class="fa fa-link"></i>Detalhes</a>
-                                    </div>
-                                </div>
-                                
-                                <h2>Happy Holi</h2>
-                                
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="/res/site/img/truelove-anuncio.jpg" alt="">
-                                    <div class="product-hover">
-                                  
-                                        <a href="#" class="view-details-link"><i class="fa fa-link"></i>Detalhes</a>
-                                    </div>
-                                </div>
-                                
-                                <h2><a href="#">True Love</a></h2>
-                        
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="/res/site/img/hungria-anuncio.jpg" alt="">
-                                    <div class="product-hover">
-                                        
-                                        <a href="#" class="view-details-link"><i class="fa fa-link"></i>Detalhes</a>
-                                    </div>
-                                </div>
-                                
-                                <h2>Infinity Party com Hungria</h2>
-     
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="/res/site/img/bailedorei-anuncio.jpeg" alt="">
-                                    <div class="product-hover">
-                                      
-                                        <a href="#" class="view-details-link"><i class="fa fa-link"></i>Detalhes</a>
-                                    </div>
-                                </div>
-                                
-                                <h2><a href="#">Baile Do Rei</a></h2>
-                        
-                            </div>
 
+                          {/loop}
+                           
                         </div>
                     </div>
                 </div>

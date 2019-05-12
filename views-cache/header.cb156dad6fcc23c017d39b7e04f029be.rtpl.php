@@ -227,6 +227,7 @@
         <!-- Optionally, you can add icons to the links -->
         <li ><a href="/admin/users"><i class="fa fa-users"></i> <span>Usuarios</span></a></li>
         <li><a href="/admin/categories"><i class="fa fa-link"></i> <span>Categorias</span></a></li>
+        <li><a href="/admin/eventos"><i class="fa fa-link"></i> <span>Eventos</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
             <span class="pull-right-container">

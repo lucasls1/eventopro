@@ -28,79 +28,22 @@
                     <div class="latest-product">
                         <h2 class="section-title">Eventos</h2>
                         <div class="product-carousel">
+                            <?php $counter1=-1;  if( isset($evento) && ( is_array($evento) || $evento instanceof Traversable ) && sizeof($evento) ) foreach( $evento as $key1 => $value1 ){ $counter1++; ?>
                             <div class="single-product">
                                 <div class="product-f-image">
-                                    <img src="/res/site/img/bailedosamuk-anuncio.png" alt="">
+                                   <img class="img-responsive" id="image-preview" src="<?php echo htmlspecialchars( $value1["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" alt="Photo">
                                     <div class="product-hover">
                                        
-                                        <a href="#" class="view-details-link"><i class="fa fa-link"></i>Detalhes</a>
+                                        <a href="/eventos/<?php echo htmlspecialchars( $value1["url_url"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="view-details-link"><i class="fa fa-link"></i>Detalhes</a>
                                     </div>
                                 </div>
                                 
-                                <h2><a href="#">Baile Do Samuk | Gravação do DVD</a></h2>
+                                <h2><a href="/eventos/<?php echo htmlspecialchars( $value1["url_url"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nme_evento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></h2>
                             
                             </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="/res/site/img/bailedoimperador-anuncio.jpg" alt="">
-                                    <div class="product-hover">
-                                      
-                                        <a href="#" class="view-details-link"><i class="fa fa-link"></i>Detalhes</a>
-                                    </div>
-                                </div>
-                                
-                                <h2>Baile do Imperador</h2>
-                             
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="/res/site/img/happyholi-anuncio.jpg" alt="">
-                                    <div class="product-hover">
-                                     
-                                        <a href="#" class="view-details-link"><i class="fa fa-link"></i>Detalhes</a>
-                                    </div>
-                                </div>
-                                
-                                <h2>Happy Holi</h2>
-                                
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="/res/site/img/truelove-anuncio.jpg" alt="">
-                                    <div class="product-hover">
-                                  
-                                        <a href="#" class="view-details-link"><i class="fa fa-link"></i>Detalhes</a>
-                                    </div>
-                                </div>
-                                
-                                <h2><a href="#">True Love</a></h2>
-                        
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="/res/site/img/hungria-anuncio.jpg" alt="">
-                                    <div class="product-hover">
-                                        
-                                        <a href="#" class="view-details-link"><i class="fa fa-link"></i>Detalhes</a>
-                                    </div>
-                                </div>
-                                
-                                <h2>Infinity Party com Hungria</h2>
-     
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="/res/site/img/bailedorei-anuncio.jpeg" alt="">
-                                    <div class="product-hover">
-                                      
-                                        <a href="#" class="view-details-link"><i class="fa fa-link"></i>Detalhes</a>
-                                    </div>
-                                </div>
-                                
-                                <h2><a href="#">Baile Do Rei</a></h2>
-                        
-                            </div>
 
+                          <?php } ?>
+                           
                         </div>
                     </div>
                 </div>

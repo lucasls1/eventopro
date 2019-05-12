@@ -26,21 +26,21 @@ $app->get("/admin/users/create",function(){
 
 });
 //-----------Apaga Usuario------------------------------
-$app->get("/admin/users/:iduser/delete",function($iduser){
+$app->get("/admin/users/:pk_usuario/delete",function($idusuario){
 
 	User::verifyLogin();
 	$user = new User();
-	$user->get((int)$iduser);
+	$user->get((int)$idusuario);
 	$user->delete();
 	header("Location: /admin/users");
 	exit;
 
 });
 //------------Atualiza Usuario--------------------------
-$app->get("/admin/users/:iduser",function($iduser){
+$app->get("/admin/users/:pk_usuario",function($idusuario){
 	 User::verifyLogin();
 	 $user = new User();
-	 $user->get((int)$iduser);
+	 $user->get((int)$idusuario);
 	$page = new PageAdmin();
 
 	$page->setTpl("users-update",array(
@@ -49,18 +49,7 @@ $app->get("/admin/users/:iduser",function($iduser){
 
 
 });
-//---------------Grava o Cadastro no banco----------------
-/*$app->post("/admin/users/create",function(){
 
-	User::verifyLogin();
-	$user = new User();
-	$_POST["inadmin"] = (isset($_POST["inadmin"]))?1:0;
-	$user->setData($_POST);
-	$user->save();
-	header("Location: /admin/users");
-	exit;
-
-});*/
 //---------------Grava o Cadastro no banco----------------
 $app->post("/admin/users/create", function () {
 
@@ -68,16 +57,16 @@ $app->post("/admin/users/create", function () {
 
 	$user = new User();
 
- 	$_POST["inadmin"] = (isset($_POST["inadmin"])) ? 1 : 0;
+ 	$_POST["adm_inadim"] = (isset($_POST["adm_inadim"])) ? 1 : 0;
 
- 	$_POST['despassword'] = password_hash($_POST["despassword"], PASSWORD_DEFAULT, [
+ 	$_POST['pwd_senha'] = password_hash($_POST["pwd_senha"], PASSWORD_DEFAULT, [
 
  		"cost"=>12
 
  	]);
 
  	$user->setData($_POST);
-
+         
 	$user->save();
 
 	header("Location: /admin/users");
@@ -85,12 +74,12 @@ $app->post("/admin/users/create", function () {
 
 });
 //---------atualizar no banco----------------
-$app->post("/admin/users/:iduser",function($iduser){
+$app->post("/admin/users/:pk_usuario",function($idusuario){
 
 	User::verifyLogin();
 	$user = new User();
-	$_POST["inadmin"] = (isset($_POST["inadmin"])) ? 1 : 0;
-	$user->get((int)$iduser);
+	$_POST["adm_inadim"] = (isset($_POST["adm_inadim"])) ? 1 : 0;
+	$user->get((int)$idusuario);
 	$user->setData($_POST);
 	$user->update();
 	header("Location: /admin/users");

@@ -3,11 +3,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Lista de Categorias
+    Lista de Produtos
   </h1>
   <ol class="breadcrumb">
     <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active"><a href="/admin/categories">Categorias</a></li>
+    <li class="active"><a href="/admin/products">Produtos</a></li>
   </ol>
 </section>
 
@@ -19,7 +19,7 @@
   		<div class="box box-primary">
             
             <div class="box-header">
-              <a href="/admin/categories/create" class="btn btn-success">Cadastrar Categoria</a>
+              <a href="/admin/eventos/create" class="btn btn-success">Cadastrar Produto</a>
             </div>
 
             <div class="box-body no-padding">
@@ -27,20 +27,24 @@
                 <thead>
                   <tr>
                     <th style="width: 10px">#</th>
-                    <th>Nome da Categoria</th>
-                    <th style="width: 240px">&nbsp;</th>
+                    <th>Nome da Evento</th>
+                    <th>Preço Inteira</th>
+                    <th>Preço Meia</th>
+                   
+                    <th style="width: 140px">&nbsp;</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {loop="$categoria"}
+                  {loop="$products"}
                   <tr>
-                    <td>{$value.pk_categoria}</td>
-                    <td>{$value.nme_categoria}</td>
+                    <td>{$value.pk_evento}</td>
+                    <td>{$value.nme_evento}</td>
+                    <td>{$value.vlr_inteiro}</td>
+                    <td>{$value.vlr_meia}</td>
+                   
                     <td>
-                      
-                       <a href="/admin/categoria/{$value.pk_categoria}/evento" class="btn btn-default btn-xs"><i class="fa fa-edit"></i> Evento</a>
-                      <a href="/admin/categories/{$value.pk_categoria}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
-                      <a href="/admin/categories/{$value.pk_categoria}/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
+                      <a href="/admin/eventos/{$value.pk_evento}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                      <a href="/admin/eventos/{$value.pk_evento}/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
                     </td>
                   </tr>
                   {/loop}
