@@ -18,15 +18,15 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/users/<?php echo htmlspecialchars( $user["pk_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="post">
+        <form role="form" action="/admin/usuario/<?php echo htmlspecialchars( $user["pk_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="post">
           <div class="box-body">
             <div class="form-group">
-              <label for="despessoa">Nome</label>
-              <input type="text" class="form-control" id="nme_pessoa" name="nme_pessoa" placeholder="Digite o nome" value="<?php echo htmlspecialchars( $user["nme_pessoa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+              <label for="desperson">Nome</label>
+              <input type="text" class="form-control" id="desperson" name="nme_pessoa" placeholder="Digite o nome" value="<?php echo htmlspecialchars( $user["nme_pessoa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
             <div class="form-group">
               <label for="deslogin">Login</label>
-              <input type="text" class="form-control" id="usr_login" name="usr_login" placeholder="Digite o login"  value="<?php echo htmlspecialchars( $user["usr_login"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+              <input type="text" class="form-control" id="deslogin" name="usr_login" placeholder="Digite o login"  value="<?php echo htmlspecialchars( $user["usr_login"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
             <div class="form-group">
               <label for="nrphone">Telefone</label>
@@ -34,7 +34,7 @@
             </div>
             <div class="form-group">
               <label for="desemail">E-mail</label>
-              <input type="email" class="form-control" id="eml_email" name="eml_email" placeholder="Digite o e-mail" value="<?php echo htmlspecialchars( $user["eml_email"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+              <input type="email" class="form-control" id="desemail" name="eml_email" placeholder="Digite o e-mail" value="<?php echo htmlspecialchars( $user["eml_email"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
             <div class="checkbox">
               <label>

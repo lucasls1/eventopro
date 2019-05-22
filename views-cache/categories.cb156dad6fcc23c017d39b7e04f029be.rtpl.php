@@ -7,7 +7,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active"><a href="/admin/categories">Categorias</a></li>
+    <li class="active"><a href="/admin/categoria">Categorias</a></li>
   </ol>
 </section>
 
@@ -19,7 +19,7 @@
   		<div class="box box-primary">
             
             <div class="box-header">
-              <a href="/admin/categories/create" class="btn btn-success">Cadastrar Categoria</a>
+              <a href="/admin/categoria/create" class="btn btn-success">Cadastrar Categoria</a>
             </div>
 
             <div class="box-body no-padding">
@@ -38,10 +38,9 @@
                     <td><?php echo htmlspecialchars( $value1["pk_categoria"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["nme_categoria"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td>
-                      
-                       <a href="/admin/categoria/<?php echo htmlspecialchars( $value1["pk_categoria"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/evento" class="btn btn-default btn-xs"><i class="fa fa-edit"></i> Evento</a>
-                      <a href="/admin/categories/<?php echo htmlspecialchars( $value1["pk_categoria"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
-                      <a href="/admin/categories/<?php echo htmlspecialchars( $value1["pk_categoria"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
+                      <a href="/admin/categoria/<?php echo htmlspecialchars( $value1["pk_categoria"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/evento" class="btn btn-default btn-xs"><i class="fa fa-edit"></i> Eventos</a>
+                      <a href="/admin/categoria/<?php echo htmlspecialchars( $value1["pk_categoria"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                      <a href="/admin/categoria/<?php echo htmlspecialchars( $value1["pk_categoria"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
                     </td>
                   </tr>
                   <?php } ?>

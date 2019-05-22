@@ -7,8 +7,8 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="/admin/categories">Categorias</a></li>
-    <li class="active"><a href="/admin/categories/create">Cadastrar</a></li>
+    <li><a href="/admin/categoria">Categorias</a></li>
+    <li class="active"><a href="/admin/categoria/create">Cadastrar</a></li>
   </ol>
 </section>
 
@@ -23,11 +23,11 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/categories/create" method="post">
+        <form role="form" action="/admin/categoria/create" method="post">
           <div class="box-body">
             <div class="form-group">
               <label for="descategory">Nome da categoria</label>
-              <input type="text" class="form-control" id="nme_categoria" name="nme_categoria" placeholder="Digite o nome da categoria">
+              <input type="text" class="form-control" id="descategory" name="nme_categoria" placeholder="Digite o nome da categoria">
             </div>
           </div>
           <!-- /.box-body -->

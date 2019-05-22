@@ -1,13 +1,13 @@
 {
-    "name": "eventopro/php-classes",
+    "name": "hcodebr/php-classes",
     "minimum-stability": "dev",
     "type": "library",
     "description": "Classes PHP",
-    "homepage": "https://github.com/lucasls1/php-classes",
+    "homepage": "https://github.com/hcodebr/php-classes",
     "authors": [
         {
-            "name": "Lucas Santiago",
-            "email": "suporte@eventopro.com.br"
+            "name": "Hcode Treinamentos",
+            "email": "suporte@hcode.com.br"
         }
     ],
     "require": {

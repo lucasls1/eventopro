@@ -1,54 +1,75 @@
-<div class="slider-area">
-        	<!-- Slider -->
-			<div class="block-slider block-slider4">
-				<ul class="" id="bxslider-home4">
-					<li>
-						<img src="/res/site/img/playground.png" alt="Slide">
-	
-					</li>
-					<li><img src="/res/site/img/happyholi.png" alt="Slide">
-		
-					</li>
-					<li><img src="/res/site/img/truelove.png" alt="Slide">
-					
-					</li>
-					<li><img src="/res/site/img/bailedoimperador.png" alt="Slide">
-	
-					</li>
-				</ul>
-			</div>
-			<!-- ./Slider -->
-    </div> <!-- End slider area -->
 
-    <div class="maincontent-area">
-        <div class="zigzag-bottom"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="latest-product">
-                        <h2 class="section-title">Eventos</h2>
-                        <div class="product-carousel">
-                            {loop="$evento"}
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                   <img class="img-responsive" id="image-preview" src="{$value.desphoto}" alt="Photo">
-                                    <div class="product-hover">
-                                       
-                                        <a href="/eventos/{$value.url_url}" class="view-details-link"><i class="fa fa-link"></i>Detalhes</a>
-                                    </div>
+<div class="slider-area">
+    <!-- Slider -->
+    <div class="block-slider block-slider4">
+        <ul class="" id="bxslider-home4">
+            <li>
+                <img src="/res/site/img/happyholi.png" alt="Slide">
+
+            </li>
+            <li><img src="/res/site/img/playground.png" alt="Slide">
+
+            </li>
+            <li><img src="/res/site/img/truelove.png" alt="Slide">
+
+            </li>
+            <li><img src="/res/site/img/bailedoimperador.png" alt="Slide">
+
+            </li>
+        </ul>
+    </div>
+    <!-- ./Slider -->
+</div> <!-- End slider area -->
+
+
+<div class="maincontent-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="latest-product">
+                    <h2 class="section-title">Eventos</h2>
+                    <div class="product-carousel">
+                        {loop="$eventos"}
+                        <div class="single-product">
+                            <div class="product-f-image">
+                                <img src="{$value.desphoto}"alt="Photo">
+                                <div class="product-hover">
+
+                                    <a href="/eventos/{$value.url_url}" class="view-details-link"><i class="fa fa-link"></i> Ver Detalhes</a>
                                 </div>
-                                
-                                <h2><a href="/eventos/{$value.url_url}">{$value.nme_evento}</a></h2>
-                            
                             </div>
 
-                          {/loop}
-                           
+                            <h2><a href="/eventos/{$value.url_url}">{$value.nme_evento}</a></h2>
+
                         </div>
+                        {/loop}
+
                     </div>
                 </div>
             </div>
         </div>
-    </div> <!-- End main content area -->
-    
-    
+    </div>
+</div> <!-- End main content area -->
+
+<div class="brands-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="brand-wrapper">
+                    <div class="brand-list">
+                        <img src="/res/site/img/brand1.png" alt="">
+                        <img src="/res/site/img/brand2.png" alt="">
+                        <img src="/res/site/img/brand3.png" alt="">
+                        <img src="/res/site/img/brand4.png" alt="">
+                        <img src="/res/site/img/brand5.png" alt="">
+                        <img src="/res/site/img/brand6.png" alt="">
+                        <img src="/res/site/img/brand1.png" alt="">
+                        <img src="/res/site/img/brand2.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End brands area -->

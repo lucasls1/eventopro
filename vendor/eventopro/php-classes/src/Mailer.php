@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace EventoPro;
 
@@ -6,53 +6,53 @@ use Rain\Tpl;
 
 class Mailer{
 
-const USERNAME = "#";
+    const USERNAME = "hhhhh";
 
-const PASSWORD = "#";
+    const PASSWORD = "hhhhhh;
 
-const NAME_FROM = "Evento Pro";
+    const NAME_FROM = "Evento Pro";
 
-private $mail;
+    private $mail;
 
-public function __construct($toAddress, $toName, $subject, $tplName, $data = array()){
+    public function __construct($toAddress, $toName, $subject, $tplName, $data = array()){
 
-$config = array(
+        $config = array(
 
-	"tpl_dir"=> $_SERVER["DOCUMENT_ROOT"]."/views/email/",
+            "tpl_dir"=> $_SERVER["DOCUMENT_ROOT"]."/views/email/",
 
-	"cache_dir"=> $_SERVER["DOCUMENT_ROOT"]."/views-cache/",
+            "cache_dir"=> $_SERVER["DOCUMENT_ROOT"]."/views-cache/",
 
-	"debug"=> false
-);
+            "debug"=> false
+        );
 
-Tpl::configure( $config );
+        Tpl::configure( $config );
 
-$tpl = new Tpl;
+        $tpl = new Tpl;
 
-foreach ($data as $key => $value) {
+        foreach ($data as $key => $value) {
 
-$tpl->assign($key, $value);
+            $tpl->assign($key, $value);
 
-}
+        }
 
-$html = $tpl->draw($tplName, true);
+        $html = $tpl->draw($tplName, true);
 
-$this->mail = new \PHPMailer;
+        $this->mail = new \PHPMailer;
 
 //Tell PHPMailer to use SMTP
 
-$this->mail->isSMTP();
+        $this->mail->isSMTP();
 
-$this->mail->SMTPOptions = array(
+        $this->mail->SMTPOptions = array(
 
-    'ssl' => array(
+            'ssl' => array(
 
-        'verify_peer' => false,
+                'verify_peer' => false,
 
-        'verify_peer_name' => false,
+                'verify_peer_name' => false,
 
-        'allow_self_signed' => true
-	));
+                'allow_self_signed' => true
+            ));
 
 //Enable SMTP debugging
 
@@ -62,15 +62,15 @@ $this->mail->SMTPOptions = array(
 
 // 2 = client and server messages
 
-$this->mail->SMTPDebug = 0;
+        $this->mail->SMTPDebug = 0;
 
 //Ask for HTML-friendly debug output
 
-$this->mail->Debugoutput = 'html';
+        $this->mail->Debugoutput = 'html';
 
 //Set the hostname of the mail server
 
-$this->mail->Host = 'smtp.live.com';
+        $this->mail->Host = 'smtp.live.com';
 
 // use
 
@@ -80,27 +80,27 @@ $this->mail->Host = 'smtp.live.com';
 
 //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
 
-$this->mail->Port = 587;
+        $this->mail->Port = 587;
 
 //Set the encryption system to use - ssl (deprecated) or tls
 
-$this->mail->SMTPSecure = 'tls';
+        $this->mail->SMTPSecure = 'tls';
 
 //Whether to use SMTP authentication
 
-$this->mail->SMTPAuth = true;
+        $this->mail->SMTPAuth = true;
 
 //Username to use for SMTP authentication - use full email address for gmail
 
-$this->mail->Username = Mailer::USERNAME;
+        $this->mail->Username = Mailer::USERNAME;
 
 //Password to use for SMTP authentication
 
-$this->mail->Password = Mailer::PASSWORD;
+        $this->mail->Password = Mailer::PASSWORD;
 
 //Set who the message is to be sent from
 
-$this->mail->setFrom(Mailer::USERNAME, Mailer::NAME_FROM);
+        $this->mail->setFrom(Mailer::USERNAME, Mailer::NAME_FROM);
 
 //Set an alternative reply-to address
 
@@ -108,36 +108,36 @@ $this->mail->setFrom(Mailer::USERNAME, Mailer::NAME_FROM);
 
 //Set who the message is to be sent to
 
-$this->mail->addAddress($toAddress, $toName);
+        $this->mail->addAddress($toAddress, $toName);
 
 //Set the subject line
 
-$this->mail->Subject = $subject;
+        $this->mail->Subject = $subject;
 
 //Read an HTML message body from an external file, convert referenced images to embedded,
 
 //convert HTML into a basic plain-text alternative body
 
-$this->mail->msgHTML($html);
+        $this->mail->msgHTML($html);
 
 //Replace the plain text body with one created manually
 
-$this->mail->AltBody = 'This is a plain-text message body';
+        $this->mail->AltBody = 'This is a plain-text message body';
 
 //Attach an image file
 
 //$mail->addAttachment('images/phpmailer_mini.png');
 
+    }
+
+    public function send()
+
+    {
+
+        return $this->mail->send();
+
+    }
+
 }
 
-public function send()
-
-{
-
-return $this->mail->send();
-
-}
-
-}
-
- ?>
+?>

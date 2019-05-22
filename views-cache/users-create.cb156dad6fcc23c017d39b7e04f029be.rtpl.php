@@ -7,8 +7,8 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="/admin/users">Usuários</a></li>
-    <li class="active"><a href="/admin/users/create">Cadastrar</a></li>
+    <li><a href="/admin/usuario">Usuários</a></li>
+    <li class="active"><a href="/admin/usuario/create">Cadastrar</a></li>
   </ol>
 </section>
 
@@ -23,7 +23,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/users/create" method="post">
+        <form role="form" action="/admin/usuario/create" method="post">
           <div class="box-body">
             <div class="form-group">
               <label for="desperson">Nome</label>
@@ -43,7 +43,7 @@
             </div>
             <div class="form-group">
               <label for="despassword">Senha</label>
-              <input type="password" class="form-control" id="pwd_senha" name="pwd_senha" placeholder="Digite a senha">
+              <input type="password" class="form-control" id="despassword" name="pwd_senha" placeholder="Digite a senha">
             </div>
             <div class="checkbox">
               <label>

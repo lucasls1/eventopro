@@ -4,10 +4,10 @@ namespace EventoPro\DB;
 
 class Sql {
 
-	const HOSTNAME = "######";
-	const USERNAME = "####";
-	const PASSWORD = "#####";
-	const DBNAME = "####";
+	const HOSTNAME = "";
+	const USERNAME = "";
+	const PASSWORD = "";
+	const DBNAME = "";
 
 	private $conn;
 
