@@ -203,7 +203,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                 <p>
                                     <?php echo getUserName(); ?>
-
                                     <small>Member since Nov. 2012</small>
                                 </p>
                             </li>
@@ -278,17 +277,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li ><a href="/admin/usuario"><i class="fa users"></i> <span>Usuarios</span></a></li>
                 <li><a href="/admin/categoria"><i class="fa fa-link"></i> <span>Categoria</span></a></li>
                 <li><a href="/admin/evento"><i class="fa fa-link"></i> <span>Eventos</span></a></li>
-               <!-- <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#">Link in level 2</a></li>
-                        <li><a href="#">Link in level 2</a></li>
-                    </ul>
-                </li> -->
+                <li><a href="/admin/orders"><i class="fa fa-shopping-cart"></i> <span>Pedidos</span></a></li>
+
             </ul>
             <!-- /.sidebar-menu -->
         </section>

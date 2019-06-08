@@ -19,6 +19,8 @@ require_once ("adminCategoria.php");
 
 require_once ("adminEvento.php");
 
+require_once ("admin-orders.php");
+
 $app->run();
 
  ?>

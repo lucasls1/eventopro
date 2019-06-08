@@ -47,7 +47,7 @@
             </div>
             <div class="checkbox">
               <label>
-                <input type="checkbox" name="adm_inadim" value="1"> Acesso de Administrador
+                <input type="checkbox" name="adm_inadmin" value="1"> Acesso de Administrador
               </label>
             </div>
           </div>

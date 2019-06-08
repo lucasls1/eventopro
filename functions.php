@@ -13,10 +13,14 @@ function formatPrice($vlprice)
     return number_format($vlprice, 2, ",", ".");
 }
 
-
-function checkLogin($adm_inadim = true)
+function formatDate($date)
 {
-    return User::checkLogin($adm_inadim);
+    return date('d/m/Y',strtotime($date));
+}
+
+function checkLogin($adm_inadmin = true)
+{
+    return User::checkLogin($adm_inadmin);
 }
 function getUserName()
 {

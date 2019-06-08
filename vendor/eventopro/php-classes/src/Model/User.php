@@ -19,7 +19,7 @@ class  User extends  Model{
     public static function getFromSession()
     {
         $user = new User();
-        if (isset($_SESSION[User::SESSION]) && (int)$_SESSION[User::SESSION]['pk_usuario'] > 0) {
+        if (isset($_SESSION[User::SESSION]) && (int)$_SESSION[User::SESSION]['pk_pessoa'] > 0) {
             $user->setData($_SESSION[User::SESSION]);
         }
         return $user;
@@ -31,12 +31,12 @@ class  User extends  Model{
             ||
             !$_SESSION[User::SESSION]
             ||
-            !(int)$_SESSION[User::SESSION]["pk_usuario"] > 0
+            !(int)$_SESSION[User::SESSION]["pk_pessoa"] > 0
         ) {
             //Não está logado
             return false;
         } else {
-            if ($inadmin === true && (bool)$_SESSION[User::SESSION]['adm_inadim'] === true) {
+            if ($inadmin === true && (bool)$_SESSION[User::SESSION]['adm_inadmin'] === true) {
                 return true;
             } else if ($inadmin === false) {
                 return true;
@@ -50,8 +50,7 @@ class  User extends  Model{
 
         $sql = new Sql();
 
-       $results = $sql->select("SELECT * FROM tb_usuario a INNER JOIN tb_pessoa b ON a.fk_pessoa = b.pk_pessoa
-                  WHERE usr_login = :LOGIN",array(
+       $results = $sql->select("SELECT * FROM tb_pessoa WHERE usr_login = :LOGIN",array(
             ":LOGIN"=>$login
 
         ));
@@ -96,45 +95,45 @@ class  User extends  Model{
     public static function  listAll()
     {
         $sql = new Sql();
-        return $sql->select("SELECT * FROM tb_usuario a INNER JOIN tb_pessoa b  ON a.fk_pessoa = b.pk_pessoa ORDER BY b.nme_pessoa");
+        return $sql->select("SELECT * FROM tb_pessoa  ORDER BY nme_pessoa");
 
     }
     public  function  save()
     {
 
         $sql = new Sql();
-       $result = $sql->select("CALL sp_usuario_save(:nme_pessoa,:usr_login,:pwd_senha,:eml_email,:nrphone,:adm_inadim)",array(
-           ":nme_pessoa"=>$this->getnme_pessoa(),
-           ":usr_login"=> $this->getusr_login(),
-           ":pwd_senha"=>User::getPasswordHash($this->getpwd_senha()),
-           ":eml_email"=>$this->geteml_email(),
-           ":nrphone"=>$this->getnrgone(),
-           "adm_inadim"=>$this->getadm_inadim()
-
-        ));
+       $result = $sql->select("CALL sp_pessoa_save(:nme_pessoa,:usr_login,:pwd_senha,:eml_email,:nrphone, :adm_inadmin)",[
+           ':nme_pessoa'=>$this->getnme_pessoa(),
+           ':usr_login'=> $this->getusr_login(),
+           ':pwd_senha'=>User::getPasswordHash($this->getpwd_senha()),
+           ':eml_email'=>$this->geteml_email(),
+           ':nrphone'=>$this->getnrphone(),
+           ':adm_inadmin'=>$this->getadm_inadmin()
+        ]);
        $this->setData($result[0]);
     }
-    public  function  get($pk_usuario)
+    public  function  get($pk_pessoa)
     {
         $sql = new Sql();
-        $results = $sql->select("SELECT * FROM tb_usuario a INNER JOIN tb_pessoa b ON a.fk_pessoa = b.pk_pessoa WHERE a.pk_usuario = :pk_usuario",array(
-            ":pk_usuario"=>$pk_usuario
+        $results = $sql->select("SELECT * FROM tb_pessoa WHERE pk_pessoa = :pk_pessoa",array(
+            ":pk_pessoa"=>$pk_pessoa
         ));
         $this->setData($results[0]);
     }
     public  function update()
     {
         $sql = new Sql();
-        $result = $sql->select("CALL sp_updateusuario_save(:pk_usuario,:nme_pessoa,:usr_login,:pwd_senha,:eml_email,:nrphone,:adm_inadim)",array(
-            ":pk_usuario"=>$this->getpk_usuario(),
-            ":nme_pessoa"=>$this->getnme_pessoa(),
-            ":usr_login"=> $this->getusr_login(),
-            ":pwd_senha"=>User::getPasswordHash($this->getpwd_senha()),
-            ":eml_email"=>$this->geteml_email(),
-            ":nrphone"=>$this->getnrgone(),
-            "adm_inadim"=>$this->getadm_inadim()
+        $result = $sql->select("CALL sp_pessoaupdate_save(:pk_pessoa,:nme_pessoa, :usr_login, :pwd_senha,:eml_email,:nrphone, :adm_inadmin)",[
+            ':pk_pessoa'=>$this->getpk_pessoa(),
+            ':nme_pessoa'=>$this->getnme_pessoa(),
+            ':usr_login'=> $this->getusr_login(),
+            ':pwd_senha'=>User::getPasswordHash($this->getpwd_senha()),
+            ':eml_email'=>$this->geteml_email(),
+            ':nrphone'=>$this->getnrphone(),
+            ':adm_inadmin'=>$this->getadm_inadmin()
 
-        ));
+        ]);
+
         $this->setData($result[0]);
     }
 
@@ -142,8 +141,8 @@ class  User extends  Model{
     {
         $sql = new Sql();
 
-        $sql->query("CALL sp_usuario_delete(:pk_usuario)",array(
-            ":pk_usuario"=>$this->getpk_usuario()
+        $sql->query("CALL sp_pessoa_delete(:pk_pessoa)",array(
+            ":pk_pessoa"=>$this->getpk_pessoa()
         ));
     }
     public static function encrypt_decrypt($action, $string) {
@@ -168,10 +167,8 @@ class  User extends  Model{
     {
         $sql = new Sql();
         $results = $sql->select("SELECT * FROM 
-                    tb_pessoa a
-                    INNER JOIN tb_usuario b 
-                    ON a.pk_pessoa = b.fk_pessoa
-                    where a.eml_email = :eml_email",array(
+                    tb_pessoa 
+                    where eml_email = :eml_email",array(
                         ":eml_email"=>$email
         ));
         if (count($results)  === 0)
@@ -220,8 +217,7 @@ class  User extends  Model{
         $results = $sql->select("
 	          SELECT *
               FROM tb_logrecuperacaosenhausuario a
-	         INNER JOIN tb_usuario b ON a.fk_usuario = b.pk_usuario
-	         INNER JOIN tb_pessoa c ON b.fk_pessoa = c.pk_pessoa
+	         INNER JOIN tb_pessoa b ON a.fk_pessoa = b.pk_pessoa
 	         WHERE
 	         a.pk_recuperacao = :pk_recuperacao
 	         AND
@@ -254,9 +250,9 @@ class  User extends  Model{
     public  function  setSenha($pwd_senha)
     {
         $sql = new Sql();
-        $sql->query("UPDATE tb_usuario SET pwd_senha = :pwd_senha WHERE pk_usuario =:pk_usuario",array(
+        $sql->query("UPDATE tb_pessoa SET pwd_senha = :pwd_senha WHERE pk_pessoa =:pk_pessoa",array(
             ":pwd_senha"=>$pwd_senha,
-            ":pk_usuario"=>$this->getpk_usuario()
+            ":pk_pessoa"=>$this->getpk_pessoa()
         ));
     }
 
@@ -305,7 +301,7 @@ class  User extends  Model{
     public static function checkLoginExist($login)
     {
         $sql = new Sql();
-        $results = $sql->select("SELECT * FROM tb_usuaurio WHERE usr_login = :deslogin", [
+        $results = $sql->select("SELECT * FROM tb_pessoa WHERE usr_login = :deslogin", [
             ':deslogin'=>$login
         ]);
         return (count($results) > 0);
@@ -315,6 +311,64 @@ class  User extends  Model{
         return password_hash($password, PASSWORD_DEFAULT, [
             'cost'=>12
         ]);
+    }
+
+    public  function getOrder()
+    {
+        $sql = new Sql();
+
+        $results = $sql->select("SELECT * 
+    FROM tb_ordem a
+    INNER JOIN tb_ordemstatus s ON a.fk_status = s.pk_status
+    INNER JOIN tb_carrinho c ON  a.fk_carrinho = c.pk_carrinho
+    INNER JOIN tb_pessoa d ON d.pk_pessoa = a.fk_pessoa
+    INNER JOIN tb_endereco e ON e.pk_endereco = a.fk_endereco
+    WHERE pk_pessoa = :pk_pessoa",[
+            ':pk_pessoa'=>$this->getpk_pessoa()
+        ]);
+        return $results;
+    }
+
+
+    public static  function getPage($page = 1 ,$itensPerPage =8)
+    {
+        $start = ($page - 1) * $itensPerPage;
+        $sql = new Sql();
+        $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                                FROM tb_pessoa
+                                ORDER BY nme_pessoa 
+                                LIMIT $start,$itensPerPage
+                                ");
+        $resultsTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
+
+        return [
+            'data'=>$results,
+            'total'=>(int)$resultsTotal[0]["nrtotal"],
+            'pages'=>ceil($resultsTotal[0]["nrtotal"] / $itensPerPage)
+
+        ];
+    }
+
+    public static  function getPageSearch($search,$page = 1 ,$itensPerPage =8)
+    {
+        $start = ($page - 1) * $itensPerPage;
+        $sql = new Sql();
+        $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                                FROM tb_pessoa
+                                WHERE nme_pessoa LIKE :search OR eml_email = :search OR usr_login LIKE :search
+                                ORDER BY nme_pessoa 
+                                LIMIT $start,$itensPerPage
+                                ",[
+                                    ':search'=>'%'.$search.'%'
+        ]);
+        $resultsTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
+
+        return [
+            'data'=>$results,
+            'total'=>(int)$resultsTotal[0]["nrtotal"],
+            'pages'=>ceil($resultsTotal[0]["nrtotal"] / $itensPerPage)
+
+        ];
     }
 
 

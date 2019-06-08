@@ -31,7 +31,7 @@ class  Evento extends  Model{
     public function  save()
     {
         $sql = new Sql();
-        $result = $sql->select("CALL sp_evento_save(:pk_evento,:nme_evento,:vlr_inteiro,:des_descricao,:url_url)",array(
+        $result = $sql->select("CALL sp_eventos_save(:pk_evento,:nme_evento,:vlr_inteiro,:des_descricao,:url_url)",array(
              ":pk_evento"=> $this->getpk_evento(),
              ":nme_evento"=> $this->getnme_evento(),
              ":vlr_inteiro"=> $this->getvlr_inteiro(),
@@ -137,6 +137,48 @@ class  Evento extends  Model{
         ",[
             ':pk_evento'=> $this->getpk_evento()
         ]);
+    }
+
+    public static  function getPage($page = 1 ,$itensPerPage =8)
+    {
+        $start = ($page - 1) * $itensPerPage;
+        $sql = new Sql();
+        $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                               FROM tb_evento 
+                               ORDER BY nme_evento
+                                LIMIT $start,$itensPerPage
+                                ");
+        $resultsTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
+
+        return [
+            'data'=>$results,
+            'total'=>(int)$resultsTotal[0]["nrtotal"],
+            'pages'=>ceil($resultsTotal[0]["nrtotal"] / $itensPerPage)
+
+        ];
+    }
+
+    public static  function getPageSearch($search,$page = 1 ,$itensPerPage =8)
+    {
+        $start = ($page - 1) * $itensPerPage;
+        $sql = new Sql();
+        $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                              FROM tb_evento 
+                              WHERE nme_evento LIKE :search
+                              ORDER BY nme_evento
+                                
+                                LIMIT $start,$itensPerPage
+                                ",[
+            ':search'=>'%'.$search.'%'
+        ]);
+        $resultsTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
+
+        return [
+            'data'=>$results,
+            'total'=>(int)$resultsTotal[0]["nrtotal"],
+            'pages'=>ceil($resultsTotal[0]["nrtotal"] / $itensPerPage)
+
+        ];
     }
 
 

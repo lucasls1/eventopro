@@ -18,7 +18,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/usuario/{$user.pk_usuario}" method="post">
+        <form role="form" action="/admin/usuario/{$user.pk_pessoa}" method="post">
           <div class="box-body">
             <div class="form-group">
               <label for="desperson">Nome</label>
@@ -38,7 +38,7 @@
             </div>
             <div class="checkbox">
               <label>
-                <input type="checkbox" name="adm_inadim" value="1" {if="$user.adm_inadim == 1"}checked{/if}> Acesso de Administrador
+                <input type="checkbox" name="adm_inadmin" value="1" {if="$user.adm_inadmin == 1"}checked{/if}> Acesso de Administrador
               </label>
             </div>
           </div>

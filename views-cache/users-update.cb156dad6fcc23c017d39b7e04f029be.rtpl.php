@@ -18,7 +18,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/usuario/<?php echo htmlspecialchars( $user["pk_usuario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="post">
+        <form role="form" action="/admin/usuario/<?php echo htmlspecialchars( $user["pk_pessoa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="post">
           <div class="box-body">
             <div class="form-group">
               <label for="desperson">Nome</label>
@@ -38,7 +38,7 @@
             </div>
             <div class="checkbox">
               <label>
-                <input type="checkbox" name="adm_inadim" value="1" <?php if( $user["adm_inadim"] == 1 ){ ?>checked<?php } ?>> Acesso de Administrador
+                <input type="checkbox" name="adm_inadmin" value="1" <?php if( $user["adm_inadmin"] == 1 ){ ?>checked<?php } ?>> Acesso de Administrador
               </label>
             </div>
           </div>

@@ -6,9 +6,9 @@ use Rain\Tpl;
 
 class Mailer{
 
-    const USERNAME = "hhhhh";
+    const USERNAME = "";
 
-    const PASSWORD = "hhhhhh;
+    const PASSWORD = "";
 
     const NAME_FROM = "Evento Pro";
 

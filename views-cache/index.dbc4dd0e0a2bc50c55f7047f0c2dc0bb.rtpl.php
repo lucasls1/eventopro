@@ -1,5 +1,4 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?>
-
 <div class="slider-area">
     <!-- Slider -->
     <div class="block-slider block-slider4">
@@ -32,7 +31,6 @@
                     <h2 class="section-title">Eventos</h2>
                     <div class="product-carousel">
                         <?php $counter1=-1;  if( isset($eventos) && ( is_array($eventos) || $eventos instanceof Traversable ) && sizeof($eventos) ) foreach( $eventos as $key1 => $value1 ){ $counter1++; ?>
-
                         <div class="single-product">
                             <div class="product-f-image">
                                 <img src="<?php echo htmlspecialchars( $value1["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"alt="Photo">
@@ -47,32 +45,9 @@
                         </div>
                         <?php } ?>
 
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div> <!-- End main content area -->
-
-<div class="brands-area">
-    <div class="zigzag-bottom"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="brand-wrapper">
-                    <div class="brand-list">
-                        <img src="/res/site/img/brand1.png" alt="">
-                        <img src="/res/site/img/brand2.png" alt="">
-                        <img src="/res/site/img/brand3.png" alt="">
-                        <img src="/res/site/img/brand4.png" alt="">
-                        <img src="/res/site/img/brand5.png" alt="">
-                        <img src="/res/site/img/brand6.png" alt="">
-                        <img src="/res/site/img/brand1.png" alt="">
-                        <img src="/res/site/img/brand2.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> <!-- End brands area -->

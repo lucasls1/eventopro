@@ -27,7 +27,7 @@ class  Carrinho extends  Model{
                     if (User::checkLogin(false))
                     {
                         $user = User::getFromSession();
-                        $data['pk_usuario'] = $user->getpk_usuario();
+                        $data['pk_pessoa'] = $user->getpk_pessoa();
                     }
                     $carrinho->setData($data);
                     $carrinho->save();
@@ -68,20 +68,21 @@ class  Carrinho extends  Model{
    public function save()
    {
        $sql = new Sql();
-       $results =$sql->select("CALL sp_carrinho_save(:pk_carrinho,:ids_identificacaosessao,:fk_usuario)",[
+       $results =$sql->select("CALL sp_carrinho_save(:pk_carrinho,:ids_identificacaosessao,:fk_pessoa)",[
            ':pk_carrinho' => $this->getpk_carrinho(),
            ':ids_identificacaosessao'=>$this->getids_identificacaosessao(),
-           ':fk_usuario'=> $this->getfk_usuario()
+           ':fk_pessoa'=> $this->getfk_pessoa()
        ]);
 
        $this->setData($results[0]);
    }
+
    public  function addEvento(Evento $evento)
    {
        $sql = new Sql();
 
        $sql->query("INSERT INTO tb_carrinhoevento (fk_carrinho, fk_evento) VALUES (:fk_carrinho,:fk_evento)",[
-           'fk_carrinho'=>$this->getpk_carrinho(),
+           ':fk_carrinho'=>$this->getpk_carrinho(),
            ':fk_evento'=>$evento->getpk_evento()
        ]);
        $this->getCalculateTotal();

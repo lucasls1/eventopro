@@ -24,6 +24,7 @@ class  Categoria extends  Model{
             ":nme_categoria"=> $this->getnme_categoria()
 
         ));
+
         $this->setData($result[0]);
         Categoria::updateFile();
     }
@@ -119,4 +120,46 @@ class  Categoria extends  Model{
             ':pk_evento'=>$evento->getpk_evento()
         ]);
     }
+
+    public static  function getPage($page = 1 ,$itensPerPage =8)
+    {
+        $start = ($page - 1) * $itensPerPage;
+        $sql = new Sql();
+        $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                                FROM tb_categoria
+                                ORDER BY nme_categoria 
+                                LIMIT $start,$itensPerPage
+                                ");
+        $resultsTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
+
+        return [
+            'data'=>$results,
+            'total'=>(int)$resultsTotal[0]["nrtotal"],
+            'pages'=>ceil($resultsTotal[0]["nrtotal"] / $itensPerPage)
+
+        ];
+    }
+
+    public static  function getPageSearch($search,$page = 1 ,$itensPerPage =8)
+    {
+        $start = ($page - 1) * $itensPerPage;
+        $sql = new Sql();
+        $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                               FROM tb_categoria
+                                WHERE nme_categoria LIKE :search
+                                ORDER BY nme_categoria 
+                                LIMIT $start,$itensPerPage
+                                ",[
+            ':search'=>'%'.$search.'%'
+        ]);
+        $resultsTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
+
+        return [
+            'data'=>$results,
+            'total'=>(int)$resultsTotal[0]["nrtotal"],
+            'pages'=>ceil($resultsTotal[0]["nrtotal"] / $itensPerPage)
+
+        ];
+    }
+
 }
